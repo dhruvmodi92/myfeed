@@ -9,7 +9,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class FeedService {
 
-  private REST_API_SERVER = "http://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=23RMY";
+  private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=23RMY";
   //private REST_API_SERVER = "/myfeed/feedservice/getfeed?userId=23RMY";
   //private REST_API_SERVER = "https://reqres.in/api/users?page=2";
 
