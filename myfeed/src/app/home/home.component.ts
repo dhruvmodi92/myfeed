@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     }) */
 
     this.callFeedService();
-    this.feed = this.feedService.processFeedResponse(SAMPLE_RESPONSE);
+    // this.feed = this.feedService.processFeedResponse(SAMPLE_RESPONSE);
   }
 
   callFeedService() {
