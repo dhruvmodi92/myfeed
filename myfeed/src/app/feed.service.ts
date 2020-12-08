@@ -9,9 +9,9 @@ import { retry, catchError, map } from 'rxjs/operators';
 })
 export class FeedService {
 
-  // private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=23RMY";
+  private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=23RMY";
   // private REST_API_SERVER = "/myfeed/feedservice/getfeed?userId=23RMY";
-  private REST_API_SERVER = "http://portal-myfeed.westus.azurecontainer.io/feedservice/getfeed?userId=23RMY";
+  // private REST_API_SERVER = "http://portal-myfeed.westus.azurecontainer.io/feedservice/getfeed?userId=23RMY";
 
   constructor(private httpClient: HttpClient) { }
 
