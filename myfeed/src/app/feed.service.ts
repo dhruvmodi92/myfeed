@@ -3,15 +3,17 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 
 import { throwError } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
+import { constants } from 'buffer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FeedService {
 
-  private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=23RMY";
-  // private REST_API_SERVER = "/myfeed/feedservice/getfeed?userId=23RMY";
-  // private REST_API_SERVER = "http://portal-myfeed.westus.azurecontainer.io/feedservice/getfeed?userId=23RMY";
+  private REST_API_SERVER = "http://morganstanley.azure-api.net/researchfeed/feedservice/getfeed?userId=XYZ89";
+  // private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=XYZ89";
+  // private REST_API_SERVER = "/myfeed/feedservice/getfeed?userId=XYZ89";
+  // private REST_API_SERVER = "http://portal-myfeed.westus.azurecontainer.io/feedservice/getfeed?userId=XYZ89";
 
   constructor(private httpClient: HttpClient) { }
 
@@ -58,4 +60,28 @@ export class FeedService {
     }
     return feedDocs;
   }
+
+  public getFeedCount() {
+    const url = "http://morganstanley.azure-api.net/researchfeed/redisservice/get?userId=XYZ89";
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      })
+    }
+    return this.httpClient.get(url, httpOptions);
+  }
+
+  public resetFeedCount() {
+    const url = "http://morganstanley.azure-api.net/researchfeed/redisservice/reset?userId=XYZ89";
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*",
+      })
+    }
+    return this.httpClient.get(url, httpOptions);
+  }
+
+  public pollFeed() {}
 }
