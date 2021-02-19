@@ -14,7 +14,7 @@ const timer$ = interval(15000); // Triggers every 15 sec
 export class HomeComponent implements OnInit {
 
   feed: any;
-  showPill: boolean = false;
+  reportCount: number = 0;
   constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
       catchError((err) => of(err))
     ).subscribe((response) => {
       if(response && response > 0) {
-        this.showPill = true;
+        this.reportCount = response;
       }
     })
   }
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadNewReports() {
-    this.showPill = false;
+    this.reportCount = 0;
     this.resetFeedCount();
     this.callFeedService();
   }

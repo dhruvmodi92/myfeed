@@ -2,7 +2,7 @@
 
 <div class="feed">
     <h2 class="header-title">MyFeed</h2>
-    <span class="pill" *ngIf="showPill" (click)="loadNewReports()">New Reports Avaiable</span>
+    <span class="pill" *ngIf="reportCount" (click)="loadNewReports()"> {{reportCount}} New {{reportCount > 1 ? 'Reports' : 'Report'}}</span>
     <div *ngIf="feed && feed.length; else NoReport" class="report-cards-list">
         <ng-container *ngFor="let item of feed">
             <div *ngIf="item" class="report-card" (click)="openReport(item)">
