@@ -10,7 +10,7 @@ import { constants } from 'buffer';
 })
 export class FeedService {
 
-  private REST_API_SERVER = "http://morganstanley.azure-api.net/researchfeed/feedservice/getfeed?userId=XYZ89";
+  private REST_API_SERVER = "https://morganstanley.azure-api.net/researchfeed/feedservice/getfeed?userId=XYZ89";
   // private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=XYZ89";
   // private REST_API_SERVER = "/myfeed/feedservice/getfeed?userId=XYZ89";
   // private REST_API_SERVER = "http://portal-myfeed.westus.azurecontainer.io/feedservice/getfeed?userId=XYZ89";
@@ -62,7 +62,7 @@ export class FeedService {
   }
 
   public getFeedCount() {
-    const url = "http://morganstanley.azure-api.net/researchfeed/redisservice/get?userId=XYZ89";
+    const url = "https://morganstanley.azure-api.net/researchfeed/redisservice/get?userId=XYZ89";
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ export class FeedService {
   }
 
   public resetFeedCount() {
-    const url = "http://morganstanley.azure-api.net/researchfeed/redisservice/reset?userId=XYZ89";
+    const url = "https://morganstanley.azure-api.net/researchfeed/redisservice/reset?userId=XYZ89";
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
