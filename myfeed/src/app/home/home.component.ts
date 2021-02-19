@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
       switchMap(() => this.feedService.getFeedCount()),
       catchError((err) => of(err))
     ).subscribe((response) => {
-      if(response) {
+      if(response && response > 0) {
         this.showPill = true;
       }
     })
