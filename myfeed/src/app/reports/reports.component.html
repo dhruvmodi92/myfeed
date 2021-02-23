@@ -1,0 +1,23 @@
+<div *ngIf="reportsList && reportsList.length; else NoReport" class="report-cards-list">
+    <ng-container *ngFor="let item of reportsList">
+        <div *ngIf="item" class="report-card" (click)="openReport(item)">
+            <div *ngIf="item.hl" class="headline">{{item.hl}}</div>
+            <div *ngIf="item.ab" class="bottomline">{{item.ab}}</div>
+            <div class="details">
+                <div>
+                    <span *ngIf="item.pn" class="eyebrow {{item.pn}}">{{item.pn}}</span>
+                    <span *ngIf="item.a && item.a.n" class="author">{{item.a.n}}
+                        <span *ngIf="item.co && item.co.length > 1"> & {{item.co.length - 1}}other{{item.co.length-1 > 1 ? 's' : ''}}</span>
+                    </span>
+                </div>
+                <div *ngIf="item.pd" class="dateline">{{item.pd | date : 'long'}}</div>
+            </div>
+        </div>
+    </ng-container>
+</div>
+
+<ng-template #NoReport>
+    <div class="no-reports">
+        {{ type === 'audio' ? 'No new audio reports' : (type === 'video' ? 'No new video reports' : 'No new reports in MyFeed') }}
+    </div>
+</ng-template>

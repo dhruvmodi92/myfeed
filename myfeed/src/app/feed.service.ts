@@ -10,12 +10,21 @@ import { constants } from 'buffer';
 })
 export class FeedService {
 
-  private REST_API_SERVER = "https://morganstanley.azure-api.net/researchfeed/feedservice/getfeed?userId=XYZ89";
+  private userId = 'XYZ89';
+  // private REST_API_SERVER = "https://morganstanley.azure-api.net/researchfeed/feedservice/getfeed?userId=XYZ89";
   // private REST_API_SERVER = "https://morganstanley.azure-api.net/myfeed/feedservice/getfeed?userId=XYZ89";
   // private REST_API_SERVER = "/myfeed/feedservice/getfeed?userId=XYZ89";
   // private REST_API_SERVER = "http://portal-myfeed.westus.azurecontainer.io/feedservice/getfeed?userId=XYZ89";
 
   constructor(private httpClient: HttpClient) { }
+
+  getUserId() {
+    return this.userId;
+  }
+
+  setUserId(userId) {
+    this.userId = userId;
+  }
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
@@ -31,38 +40,39 @@ export class FeedService {
   }
 
   public sendGetRequest() {
-    // let headers = new HttpHeaders();
-    // headers = headers.set('Accept', 'application/json');
+    const url = "https://morganstanley.azure-api.net/researchfeed/feedservice/getfeed?userId=" + this.userId;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         "Access-Control-Allow-Origin": "*",
       })
     }
-    // return this.httpClient.get(this.REST_API_SERVER).pipe(
-    //   map(response => response),
-    //   catchError(this.handleError)
-    // );
-    return this.httpClient.get(this.REST_API_SERVER, httpOptions);
+    return this.httpClient.get(url, httpOptions);
   }
 
   public processFeedResponse(response) {
-    let feedDocs = [];
+    let allDocs = [], audioDocs = [], videoDocs = [];
     if (response && response.status === 'SUCCESS' && response.userFeedDetails && response.userFeedDetails.length) {
       response.userFeedDetails.forEach((item) => {
         if (item && item.docs && item.docs.length) {
-          feedDocs = feedDocs.concat(item.docs);
+          allDocs = allDocs.concat(item.docs);
           // item.docs.forEach((doc) => {
           //   console.log(new Date(doc.pd));
           // })
         }
+        if (item && item.audio && item.audio.length) {
+          audioDocs = audioDocs.concat(item.audio);
+        }
+        if (item && item.video && item.video.length) {
+          videoDocs = videoDocs.concat(item.video);
+        }
       })
     }
-    return feedDocs;
+    return { allDocs, audioDocs, videoDocs };
   }
 
   public getFeedCount() {
-    const url = "https://morganstanley.azure-api.net/researchfeed/redisservice/get?userId=XYZ89";
+    const url = "https://morganstanley.azure-api.net/researchfeed/redisservice/get?userId=" + this.userId;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -73,7 +83,7 @@ export class FeedService {
   }
 
   public resetFeedCount() {
-    const url = "https://morganstanley.azure-api.net/researchfeed/redisservice/reset?userId=XYZ89";
+    const url = "https://morganstanley.azure-api.net/researchfeed/redisservice/reset?userId=" + this.userId;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

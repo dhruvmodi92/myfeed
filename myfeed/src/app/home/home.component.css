@@ -9,68 +9,12 @@
     padding: 20px;
     position: sticky;
     top: 0;
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
+    /* box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%); */
 
     /* font-size: 16px;
     color: #fff;
     background: #002b51;
     height: 44px; */
-}
-
-.feed .report-cards-list {
-    margin: 15px;
-}
-
-.feed .report-card {
-    padding: 16px;
-    /* border-bottom: 1px solid #efefef; */
-    margin-bottom: 5px;
-    background: #fff;
-    -webkit-box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,.15);
-}
-
-.feed .report-card .headline{
-    font-weight: 600;
-    font-size: 20px;
-    color: #333;
-    letter-spacing: 0;
-    line-height: 24px;
-    -webkit-font-smoothing: antialiased;
-}
-
-.feed .report-card .bottomline{
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: normal;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-}
-
-.feed .report-card .details{
-    font-size: 13px;
-    margin-top: 8px;
-    color: #333;
-    letter-spacing: 0;
-    line-height: 15px;
-} 
-
-.feed .report-card .eyebrow{
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.feed .report-card .author{
-}
-
-.feed .report-card .dateline {
-    font-size: 12px;
-    margin-top: 5px;
-    line-height: 14px;
-    font-weight: 400;
 }
 
 .feed .pill {
@@ -86,31 +30,32 @@
     box-shadow: 0 2px 4px 0 rgba(0,0,0,.20);
     border-radius: 20px;
     position: fixed;
-    top: 70px;
+    top: 120px;
     left: 0;
     right: 0;
     margin: auto;
 }
 
-.feed .no-reports {
-    color: #676767;
-    font-size: 17px;
-    text-align: center;
-    margin-top: 25vh;
+.feed .feed-buckets {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 62px;
+    background: #fff;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 15%);
 }
 
-.eyebrow.Update {
-    color: #39bb9d;
+.feed .feed-buckets > div {
+    width: 33.3%;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #676767;
 }
-.eyebrow.Bluepaper {
-    color: #0070af;
-}
-.eyebrow.Insight {
-    color: #009edc;
-}
-.eyebrow.Idea {
-    color: #6775b8;
-}
-.eyebrow.Foundation {
-    color: #808285;
+
+.feed .feed-buckets > div.active {
+    border-bottom: 2px solid #333333;
+    color: #333333;
 }
