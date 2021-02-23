@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   reportCount: number = 0;
   selectedIndex: number = 0;
   userId = 'XYZ89';
+  showAllTabs = false;
   constructor(private feedService: FeedService) { }
 
   ngOnInit(): void {
@@ -41,6 +42,7 @@ export class HomeComponent implements OnInit {
     this.feedService.sendGetRequest().subscribe(
       (data: any) => {
         this.feed = this.feedService.processFeedResponse(data);
+        this.showAllTabs = this.feed.showAllTabs;
       },
       (error) => {
         console.log(error);
