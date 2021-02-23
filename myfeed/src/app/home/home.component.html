@@ -1,27 +1,20 @@
-<!-- <button name="myFeed" (click)="callFeedService()">my feed</button> -->
-
 <div class="feed">
     <h2 class="header-title">MyFeed</h2>
-    <span class="pill" *ngIf="showPill" (click)="loadNewReports()">New Reports Avaiable</span>
-    <div *ngIf="feed && feed.length; else NoReport" class="report-cards-list">
-        <ng-container *ngFor="let item of feed">
-            <div *ngIf="item" class="report-card" (click)="openReport(item)">
-                <div *ngIf="item.hl" class="headline">{{item.hl}}</div>
-                <div *ngIf="item.ab" class="bottomline">{{item.ab}}</div>
-                <div class="details">
-                    <div>
-                        <span *ngIf="item.pn" class="eyebrow {{item.pn}}">{{item.pn}}</span>
-                        <span *ngIf="item.a && item.a.n" class="author">{{item.a.n}}
-                            <span *ngIf="item.co && item.co.length > 1"> & {{item.co.length - 1}}other{{item.co.length-1 > 1 ? 's' : ''}}</span>
-                        </span>
-                    </div>
-                    <div *ngIf="item.pd" class="dateline">{{item.pd | date : 'long'}}</div>
-                </div>
-            </div>
+    <span class="pill" *ngIf="reportCount" (click)="loadNewReports()"> {{reportCount}} New {{reportCount > 1 ? 'Reports' : 'Report'}}</span>
+    <div class="feed-buckets">
+        <div (click)="selectedIndex=0" [ngClass]="{'active': selectedIndex==0}">All</div>
+        <div (click)="selectedIndex=1" [ngClass]="{'active': selectedIndex==1}">Audio</div>
+        <div (click)="selectedIndex=2" [ngClass]="{'active': selectedIndex==2}">Video</div>
+    </div>
+    <div [ngSwitch]="selectedIndex">
+        <ng-container *ngSwitchCase="0">
+            <app-reports [reportsList]="feed && feed.allDocs" [type]="'all'"></app-reports>
+        </ng-container>
+        <ng-container *ngSwitchCase="1">
+            <app-reports [reportsList]="feed && feed.audioDocs" [type]="'audio'"></app-reports>
+        </ng-container>
+        <ng-container *ngSwitchCase="2">
+            <app-reports [reportsList]="feed && feed.videoDocs" [type]="'video'"></app-reports>
         </ng-container>
     </div>
-
-    <ng-template #NoReport>
-        <div class="no-reports">No new reports in MyFeed</div>
-    </ng-template>
 </div>
