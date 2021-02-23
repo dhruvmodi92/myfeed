@@ -1,20 +1,28 @@
 <div class="feed">
     <h2 class="header-title">MyFeed</h2>
-    <span class="pill" *ngIf="reportCount" (click)="loadNewReports()"> {{reportCount}} New {{reportCount > 1 ? 'Reports' : 'Report'}}</span>
-    <div class="feed-buckets">
-        <div (click)="selectedIndex=0" [ngClass]="{'active': selectedIndex==0}">All</div>
-        <div (click)="selectedIndex=1" [ngClass]="{'active': selectedIndex==1}">Audio</div>
-        <div (click)="selectedIndex=2" [ngClass]="{'active': selectedIndex==2}">Video</div>
+    <span class="pill" *ngIf="reportCount" (click)="loadNewReports()"> {{reportCount}} New {{reportCount > 1 ? 'Reports'
+        : 'Report'}}</span>
+
+    <div *ngIf="!showAllTabs; else ShowAllTabs">
+        <app-reports [reportsList]="feed && feed.allDocs" [type]="'all'"></app-reports>
     </div>
-    <div [ngSwitch]="selectedIndex">
-        <ng-container *ngSwitchCase="0">
-            <app-reports [reportsList]="feed && feed.allDocs" [type]="'all'"></app-reports>
-        </ng-container>
-        <ng-container *ngSwitchCase="1">
-            <app-reports [reportsList]="feed && feed.audioDocs" [type]="'audio'"></app-reports>
-        </ng-container>
-        <ng-container *ngSwitchCase="2">
-            <app-reports [reportsList]="feed && feed.videoDocs" [type]="'video'"></app-reports>
-        </ng-container>
-    </div>
+
+    <ng-template #ShowAllTabs>
+        <div class="feed-buckets">
+            <div (click)="selectedIndex=0" [ngClass]="{'active': selectedIndex==0}">All</div>
+            <div (click)="selectedIndex=1" [ngClass]="{'active': selectedIndex==1}">Audio</div>
+            <div (click)="selectedIndex=2" [ngClass]="{'active': selectedIndex==2}">Video</div>
+        </div>
+        <div [ngSwitch]="selectedIndex">
+            <ng-container *ngSwitchCase="0">
+                <app-reports [reportsList]="feed && feed.allDocs" [type]="'all'"></app-reports>
+            </ng-container>
+            <ng-container *ngSwitchCase="1">
+                <app-reports [reportsList]="feed && feed.audioDocs" [type]="'audio'"></app-reports>
+            </ng-container>
+            <ng-container *ngSwitchCase="2">
+                <app-reports [reportsList]="feed && feed.videoDocs" [type]="'video'"></app-reports>
+            </ng-container>
+        </div>
+    </ng-template>
 </div>

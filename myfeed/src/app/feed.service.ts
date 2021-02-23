@@ -51,7 +51,7 @@ export class FeedService {
   }
 
   public processFeedResponse(response) {
-    let allDocs = [], audioDocs = [], videoDocs = [];
+    let allDocs = [], audioDocs = [], videoDocs = [], showAllTabs = false;
     if (response && response.status === 'SUCCESS' && response.userFeedDetails && response.userFeedDetails.length) {
       response.userFeedDetails.forEach((item) => {
         if (item && item.docs && item.docs.length) {
@@ -62,13 +62,15 @@ export class FeedService {
         }
         if (item && item.audio && item.audio.length) {
           audioDocs = audioDocs.concat(item.audio);
+          showAllTabs = true;
         }
         if (item && item.video && item.video.length) {
           videoDocs = videoDocs.concat(item.video);
+          showAllTabs = true;
         }
       })
     }
-    return { allDocs, audioDocs, videoDocs };
+    return { allDocs, audioDocs, videoDocs, showAllTabs };
   }
 
   public getFeedCount() {
@@ -93,5 +95,5 @@ export class FeedService {
     return this.httpClient.get(url, httpOptions);
   }
 
-  public pollFeed() {}
+  public pollFeed() { }
 }
